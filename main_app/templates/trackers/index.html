@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h1>Trackers</h1>
+
+{% for tracker in trackers %}
+  <div class="card">
+    <a href="/trackers/{{ tracker.id }}">
+    <div class="card-content">
+      <span class="card-title">{{ tracker.tracker_name }}</span>
+    </div>
+    </a>
+  </div>
+{% endfor %}
+
+{% endblock %}
