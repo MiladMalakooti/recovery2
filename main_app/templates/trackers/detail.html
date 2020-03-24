@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h1>Tracker Details</h1>
+
+{% for record in records %}
+<div class="card">
+  <div class="card-content">
+    <span class="card-title">{{ record.timestamp }}</span>
+    <p>SYS: {{ record.input1 }}</p>
+  </div>
+</div>
+{% endfor %}
+
+{% endblock %}

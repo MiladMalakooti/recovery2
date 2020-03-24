@@ -1,19 +1,11 @@
 from django.shortcuts import render
+from django.views.generic.edit import CreateView
 from .models import Record
+from .models import Tracker
 
-# Add the Cat class & list and view function below the imports
-# class Record:  # Note that parens are optional if not inheriting from another class
-#     def __init__(self, input1, input2, input3, timestamp):
-#         self.input1 = input1
-#         self.input2 = input2
-#         self.input3 = input3
-#         self.timestamp = timestamp
-
-# records = [
-#     Record('Lolo', 'tabby', 'foul little demon', 3),
-#     Record('Sachi', 'tortoise shell', 'diluted tortoise shell', 0),
-#     Record('Raven', 'black tripod', '3 legged cat', 4)
-# ]
+class TrackerCreate(CreateView):
+    model = Tracker
+    fields = ['tracker_name', 'label1', 'label2', 'label3']
 
 def records_index(request):
     records = Record.objects.all()
@@ -21,7 +13,11 @@ def records_index(request):
 
 def trackers_index(request):
     trackers = Tracker.objects.all()
-    return render(request, 'trackers/index.html', { 'trackers': records })
+    return render(request, 'trackers/index.html', { 'trackers': trackers })
+
+def trackers_detail(request, tracker_id):
+    tracker = Tracker.objects.get(id=tracker_id)
+    return render(request, 'trackers/detail.html', { 'tracker': tracker })
 
 # Define the home view
 def home(request):

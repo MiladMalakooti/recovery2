@@ -12,6 +12,9 @@ from django.db import models
 
 class Tracker(models.Model):
     tracker_name = models.CharField(max_length=100)
+    label1 = models.CharField(max_length=100)
+    label2 = models.CharField(max_length=100)
+    label3 = models.CharField(max_length=100)
 
     def __str__(self):
         return self.tracker_name
