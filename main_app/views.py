@@ -1,7 +1,6 @@
 from django.shortcuts import render
 from django.views.generic.edit import CreateView
-from .models import Record
-from .models import Tracker
+from .models import Record, Tracker
 
 class TrackerCreate(CreateView):
     model = Tracker
