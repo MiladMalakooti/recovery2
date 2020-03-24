@@ -1,4 +1,5 @@
 from django.db import models
+from django.urls import reverse
 
 # vvvv comment out below when trying to get local time
 # from datetime import datetime
@@ -18,6 +19,9 @@ class Tracker(models.Model):
 
     def __str__(self):
         return self.tracker_name
+    
+    def get_absolute_url(self):
+        return reverse('detail', kwargs={'tracker_id': self.id})
 
 class Record(models.Model):
     input1 = models.IntegerField()

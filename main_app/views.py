@@ -5,7 +5,8 @@ from .models import Tracker
 
 class TrackerCreate(CreateView):
     model = Tracker
-    fields = ['tracker_name', 'label1', 'label2', 'label3']
+    fields = '__all__'
+    success_url = '/trackers/'
 
 def records_index(request):
     records = Record.objects.all()
