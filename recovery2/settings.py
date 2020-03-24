@@ -80,7 +80,7 @@ WSGI_APPLICATION = 'recovery2.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'recovery2',
+        'NAME': 'Recovery2',
     }
 }
 

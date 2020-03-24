@@ -9,6 +9,10 @@
     <span class="card-title">{{ record.timestamp }}</span>
     <p>SYS: {{ record.input1 }}</p>
   </div>
+  <div class="card-action">
+    <a href="{% url 'trackers_update' tracker.id %}">Edit</a>
+    <a href="{% url 'trackers_delete' tracker.id %}">Delete</a>
+  </div>
 </div>
 {% endfor %}
 

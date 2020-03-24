@@ -1,11 +1,20 @@
 from django.shortcuts import render
-from django.views.generic.edit import CreateView
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from .models import Record, Tracker
 
 class TrackerCreate(CreateView):
     model = Tracker
     fields = '__all__'
     success_url = '/trackers/'
+
+class TrackerUpdate(UpdateView):
+  model = Tracker
+  # Let's disallow the renaming of a cat by excluding the name field!
+  fields = '__all__'
+
+class TrackerDelete(DeleteView):
+  model = Tracker
+  success_url = '/trackers/'
 
 def records_index(request):
     records = Record.objects.all()
