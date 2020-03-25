@@ -2,7 +2,7 @@
 {% block content %}
 
 <h1>Trackers</h1>
-
+<div id="trackers">
 {% for tracker in trackers %}
   <div class="card">
     <a href="{% url 'detail' tracker.id %}">
@@ -16,5 +16,5 @@
     </a>
   </div>
 {% endfor %}
-
+</div>
 {% endblock %}

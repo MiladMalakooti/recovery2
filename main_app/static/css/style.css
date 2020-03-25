@@ -2,20 +2,21 @@ body {
     display: flex;
     min-height: 100vh;
     flex-direction: column;
-    background-color: aqua;
-    color:purple;
+    background-color: white;
+    color:darkslategray;
+    font-family: 'Playfair Display SC', serif;
 }
 
 .nav-wrapper {
-    background-color: blue;
+    background-color: #2A6793;
 }
 
 .page-footer {
-    background-color: blue;
+    background-color: #2A6793;
 }
 
 .app-bg {
-    background-color: aquamarine;
+    background-color:rgb(93, 196, 49)
 }
   
 main {
@@ -25,4 +26,18 @@ main {
 footer.page-footer {
     padding-top: 0;
     text-align: right;
+}
+
+.btn {
+    background-color: rgb(82, 163, 47);
+
+}
+/* .card {
+    display: flex;
+    margin: 16px;
+}
+
+#trackers {
+    display: flex;
+    flex-direction: row; */
 }
