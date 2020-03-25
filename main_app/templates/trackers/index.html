@@ -8,6 +8,10 @@
     <a href="{% url 'detail' tracker.id %}">
     <div class="card-content">
       <span class="card-title">{{ tracker.tracker_name }}</span>
+      <div class="card-action">
+        <a href="{% url 'trackers_update' tracker.id %}">Edit</a>
+        <a href="{% url 'trackers_delete' tracker.id %}">Delete</a>
+      </div>
     </div>
     </a>
   </div>

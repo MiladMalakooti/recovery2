@@ -1,6 +1,5 @@
 from django.contrib import admin
-from .models import Record
-from .models import Tracker
+from .models import Record, Tracker
 
 # Register your models here.
 

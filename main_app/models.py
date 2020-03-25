@@ -28,6 +28,10 @@ class Record(models.Model):
     input2 = models.IntegerField()
     input3 = models.IntegerField()
     timestamp = models.TimeField(auto_now_add=True)
+    tracker = models.ForeignKey(Tracker, on_delete=models.CASCADE)
 
     def __int__(self):
-        return self.input1
+        return self.input1, self.input2, self.input3
+
+    class Meta:
+        ordering = ['-timestamp']
