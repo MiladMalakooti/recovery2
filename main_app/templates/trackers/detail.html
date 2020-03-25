@@ -6,7 +6,17 @@
 <div class="col s6">
   <form action="{% url 'add_record' tracker.id %}" method="post">
     {% csrf_token %}
-    {{ record_form.as_p }}
+    
+{% for field, label in form_list %}
+<div class="fieldWrapper">
+    {{ field.errors }}
+    {{ label }}{{ field }}
+    {% if field.help_text %}
+    <p class="help">{{ field.help_text|safe }}</p>
+    {% endif %}
+</div>
+  {% endfor %}
+
     <input type="submit" class="btn" value="Add">
   </form>
   <table class="striped">

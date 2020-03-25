@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from django.forms.models import model_to_dict
 from .models import Tracker
 from .forms import RecordForm
 
@@ -24,8 +25,14 @@ def trackers_index(request):
 def trackers_detail(request, tracker_id):
     tracker = Tracker.objects.get(id=tracker_id)
     record_form = RecordForm()
+    arr = [tracker.label1, tracker.label2, tracker.label3]
+    # tracker_dict = model_to_dict(tracker)
+    # for key, value in tracker_dict.items():
+    #     arr.append(value)
+    form_list = zip(record_form, arr)
+    print(type(form_list))
     return render(request, 'trackers/detail.html', {
-         'tracker': tracker, 'record_form': record_form 
+         'tracker': tracker, 'record_form': record_form, 'arr': arr, 'form_list': form_list,
          })
 
 # Define the home view
