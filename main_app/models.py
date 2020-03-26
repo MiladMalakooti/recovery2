@@ -1,5 +1,6 @@
 from django.db import models
 from django.urls import reverse
+from django.contrib.auth.models import User
 
 # vvvv comment out below when trying to get local time
 # from datetime import datetime
@@ -16,6 +17,7 @@ class Tracker(models.Model):
     label1 = models.CharField(max_length=100)
     label2 = models.CharField(max_length=100)
     label3 = models.CharField(max_length=100)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.tracker_name

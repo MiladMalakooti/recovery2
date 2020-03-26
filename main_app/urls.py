@@ -1,5 +1,4 @@
 from django.contrib import admin
-# Add the include function to the import
 from django.urls import path
 from . import views
 
@@ -12,5 +11,5 @@ urlpatterns = [
     path('trackers/<int:pk>/update/', views.TrackerUpdate.as_view(), name='trackers_update'),
     path('trackers/<int:pk>/delete/', views.TrackerDelete.as_view(), name='trackers_delete'),
     path('trackers/<int:tracker_id>/add_record/', views.add_record, name='add_record'),
-    
+    path('accounts/signup/', views.signup, name='signup'),
 ]
