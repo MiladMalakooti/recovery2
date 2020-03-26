@@ -40,4 +40,8 @@ footer.page-footer {
 #trackers {
     display: flex;
     flex-direction: row; */
+/* } */
+canvas {
+    height: 5vh;
+    width: 5vh;
 }

@@ -25,15 +25,57 @@
     </thead>
     <tbody>
       {% for record in tracker.record_set.all %}
+        
         <tr>
           <td>{{record.timestamp}}</td>
-          <td>{{record.input1}}</td>
-          <td>{{record.input2}}</td>
-          <td>{{record.input3}}</td>
+          <td class="record-input">{{record.input1}}</td>
+          <td class="record-input">{{record.input2}}</td>
+          <td class="record-input">{{record.input3}}</td>
         </tr>
       {% endfor %}
     </tbody>
   </table>
 </div>
 </div>
+<canvas id="chart1" width="100" height="100"></canvas>
+<script>
+  let ctx = document.getElementById("chart1");
+  let inputs = document.getElementsByClassName("record-input");
+  let inputsArr = []
+  let labelArr = []
+  for(let input of inputs){
+    inputsArr.push(parseInt(input.innerHTML))
+  }
+  for(let i = 0; i < inputsArr.length; i++){
+    labelArr.push(i)
+  }
+  console.log(inputsArr)
+var chart = new Chart(ctx, {
+type: 'line',
+data: {
+  labels: labelArr,
+  datasets: [{
+      label: '# of Votes',
+      data: inputsArr,
+      backgroundColor: [
+          'rgba(255, 99, 132, 0.2)',
+      ],
+      borderColor: [
+          'rgba(255,99,132,1)',
+      ],
+      borderWidth: 1
+  }]
+},
+options: {
+  scales: {
+      yAxes: [{
+          ticks: {
+              beginAtZero:true
+          }
+      }]
+  }
+}
+});
+</script>
+
 {% endblock %}

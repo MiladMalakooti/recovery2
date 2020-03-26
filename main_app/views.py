@@ -5,7 +5,7 @@ from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
-from .models import Tracker
+from .models import Tracker, Record
 from .forms import RecordForm
 
 class TrackerCreate(LoginRequiredMixin, CreateView):
@@ -33,12 +33,15 @@ def trackers_index(request):
 @login_required
 def trackers_detail(request, tracker_id):
     tracker = Tracker.objects.get(id=tracker_id)
+    # record = Record.objects.get(id=record_id)
     record_form = RecordForm()
     arr = [tracker.label1, tracker.label2, tracker.label3]
+    # caroline = [record.input1, record.input2, record.input3]
     form_list = zip(record_form, arr)
-    print(type(form_list))
+    # print(type(form_list))
+    # print(caroline)
     return render(request, 'trackers/detail.html', {
-         'tracker': tracker, 'record_form': record_form, 'arr': arr, 'form_list': form_list,
+         'tracker': tracker, 'record_form': record_form, 'arr': arr, 'form_list': form_list, #'caroline': caroline,
          })
 
 @login_required
@@ -49,6 +52,8 @@ def home(request):
 def about(request):
     return render(request, 'about.html')
 
+rec_arr = []
+
 @login_required
 def add_record(request, tracker_id):
     form = RecordForm(request.POST)
@@ -56,6 +61,9 @@ def add_record(request, tracker_id):
         new_record = form.save(commit=False)
         new_record.tracker_id = tracker_id
         new_record.save()
+        rec_arr.append(new_record.__dict__)
+        print(new_record.__dict__)
+        print(rec_arr)
     return redirect('detail', tracker_id=tracker_id)
 
 def signup(request):
