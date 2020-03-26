@@ -1,0 +1,116 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>{{ tracker.tracker_name }}</h1>
+
+<div class="row">
+<div class="col s6">
+  <form action="{% url 'add_record' tracker.id %}" method="post">
+    {% csrf_token %}
+    
+{% for field, label in form_list %}
+<div class="fieldWrapper">
+    {{ field.errors }}
+    {{ label }}{{ field }}
+    {% if field.help_text %}
+    <p class="help">{{ field.help_text|safe }}</p>
+    {% endif %}
+</div>
+  {% endfor %}
+
+    <input type="submit" class="btn" value="Add">
+  </form>
+  <table class="striped">
+    <thead>
+      <tr><th>timestamp</th><th>{{ tracker.label1 }}</th><th>{{ tracker.label2 }}</th><th>{{ tracker.label3 }}</th></tr>
+    </thead>
+    <tbody>
+      {% for record in tracker.record_set.all %}
+        
+        <tr>
+          <td>{{record.timestamp}}</td>
+          <td class="record-input">{{record.input1}}</td>
+          <td class="record-input-two">{{record.input2}}</td>
+          <td class="record-input-three">{{record.input3}}</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+</div>
+<canvas id="chart1" width="100" height="100"></canvas>
+<script>
+  let ctx = document.getElementById("chart1");
+  let inputOne = []
+  inputOne.push(parseInt(document.getElementsByClassName("record-input").innerHTML));
+  let inputTwo = []
+  inputTwo.push(parseInt(document.getElementsByClassName("record-input-two").innerHTML));
+  let inputThree = []
+  inputThree.push(parseInt(document.getElementsByClassName("record-input-three").innerHTML));
+  let inputsArr = []
+  let inputsArrTwo = []
+  let inputsArrThree = []
+  let labelArr = []
+  for(let input of inputOne){
+    inputsArr.push(input)
+  }
+  for(let input of inputTwo){
+    inputsArrTwo.push(input)
+  }
+  for(let input of inputThree){
+    inputsArrThree.push(input)
+  }
+  for(let i = 0; i < inputsArr.length; i++){
+    labelArr.push(i)
+    
+  }
+  console.log(inputsArr)
+var chart = new Chart(ctx, {
+type: 'line',
+data: {
+  labels: labelArr,
+  datasets: [{
+      label: '# of Votes',
+      data: inputsArr,
+      backgroundColor: [
+          'rgba(255, 99, 132, 0.2)',
+      ],
+      borderColor: [
+          'rgba(255,99,132,1)',
+      ],
+      borderWidth: 1
+  },{
+      label: '# of Votes',
+      data: inputsArrTwo,
+      backgroundColor: [
+          'rgba(130, 115, 50, 0.2)',
+      ],
+      borderColor: [
+          'rgba(100,150,40,1)',
+      ],
+      borderWidth: 2
+  },{
+      label: '# of Votes',
+      data: inputsArrThree,
+      backgroundColor: [
+          'rgba(50, 50, 50, 0.2)',
+      ],
+      borderColor: [
+          'rgba(60,60,40,1)',
+      ],
+      borderWidth: 2
+  }
+]
+},
+options: {
+  scales: {
+      yAxes: [{
+          ticks: {
+              beginAtZero:true
+          }
+      }]
+  }
+}
+});
+</script>
+
+{% endblock %}
